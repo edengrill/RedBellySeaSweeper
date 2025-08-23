@@ -1,0 +1,50 @@
+# Build artifacts
+Builds/MacOSX/build/
+Builds/MacOSX/DerivedData/
+*.mode1v3
+*.pbxuser
+*.perspectivev3
+*.user
+*.ncb
+*.suo
+*.ilk
+*.pch
+*.pdb
+*.dep
+*.idb
+*.manifest
+*.o
+*.d
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+
+# macOS specific
+.DS_Store
+*.swp
+*~
+.svn
+.AppleDouble
+.LSOverride
+
+# Xcode specific
+xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+*.xcworkspacedata
+
+# VST3 SDK (if downloaded locally)
+modules/juce_audio_processors/format_types/VST3_SDK/base/
+modules/juce_audio_processors/format_types/VST3_SDK/public.sdk/
+modules/juce_audio_processors/format_types/VST3_SDK/vstgui4/
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# IDE specific
+.idea/
+.vscode/
+*.code-workspace
