@@ -4,6 +4,7 @@
 #include "PluginProcessor.h"
 #include "LookAndFeel.h"
 #include "WaveformDisplay.h"
+#include "DropUpComboBox.h"
 
 class SwoopDeviceAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Slider::Listener,
@@ -45,8 +46,8 @@ private:
     juce::Label endFreqValue;
     juce::Label sweepTimeValue;
     
-    juce::ComboBox waveTypeCombo;
-    juce::ComboBox sweepModeCombo;
+    DropUpComboBox waveTypeCombo;
+    DropUpComboBox sweepModeCombo;
     
     juce::Label waveTypeLabel;
     juce::Label sweepModeLabel;
