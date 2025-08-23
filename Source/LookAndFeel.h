@@ -97,18 +97,23 @@ public:
         g.setColour(redAccent);
         g.drawRoundedRectangle(boxBounds.toFloat().reduced(0.5f), cornerSize, 2.0f);
         
-        // Draw arrow
+        // Draw arrow pointing up (for drop-up menu)
         juce::Path p;
-        p.addTriangle(width - 20, height * 0.45f,
-                     width - 14, height * 0.55f,
-                     width - 8, height * 0.45f);
+        p.addTriangle(width - 20, height * 0.55f,
+                     width - 14, height * 0.45f,
+                     width - 8, height * 0.55f);
         g.setColour(redAccent);
         g.fillPath(p);
         
-        // Draw the text
-        juce::Rectangle<int> textArea(10, 0, width - 35, height);
-        g.setFont(getComboBoxFont(box));
+        // Don't draw text here - let JUCE handle it via drawComboBoxTextWhenNothingSelected
+    }
+    
+    void drawComboBoxTextWhenNothingSelected(juce::Graphics& g, juce::ComboBox& box, juce::Label&) override
+    {
         g.setColour(redAccent);
+        g.setFont(getComboBoxFont(box));
+        
+        auto textArea = box.getLocalBounds().reduced(10, 0).withTrimmedRight(30);
         g.drawFittedText(box.getText(), textArea, juce::Justification::centredLeft, 1);
     }
     

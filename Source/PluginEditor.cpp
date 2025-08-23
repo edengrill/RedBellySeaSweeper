@@ -170,12 +170,12 @@ void SwoopDeviceAudioProcessorEditor::resized()
     sweepTimeKnob.setBounds(startX + knobSpacing*2 - knobSize/2, knobY, knobSize, knobSize);
     sweepTimeValue.setBounds(startX + knobSpacing*2 - 35, knobY + knobSize + 5, 70, 20);
     
-    // Position combo boxes
-    waveTypeLabel.setBounds(190, 460, 50, 30);
-    waveTypeCombo.setBounds(240, 460, 150, 30);
+    // Position combo boxes closer to bottom
+    waveTypeLabel.setBounds(190, 580, 50, 30);
+    waveTypeCombo.setBounds(240, 580, 150, 30);
     
-    sweepModeLabel.setBounds(410, 460, 50, 30);
-    sweepModeCombo.setBounds(460, 460, 150, 30);
+    sweepModeLabel.setBounds(410, 580, 50, 30);
+    sweepModeCombo.setBounds(460, 580, 150, 30);
 }
 
 void SwoopDeviceAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
