@@ -47,12 +47,12 @@ SwoopDeviceAudioProcessorEditor::SwoopDeviceAudioProcessorEditor (SwoopDeviceAud
     // Setup keyboard tooltip (initially hidden and NOT visible)
     keyboardTooltip.setText("Press X to start/stop", juce::dontSendNotification);
     keyboardTooltip.setJustificationType(juce::Justification::centred);
-    keyboardTooltip.setColour(juce::Label::textColourId, juce::Colours::white); // White text
+    keyboardTooltip.setColour(juce::Label::textColourId, juce::Colour(0xffd83427)); // Red text
     keyboardTooltip.setColour(juce::Label::backgroundColourId, juce::Colours::transparentBlack); // No background
     keyboardTooltip.setFont(juce::Font(13.0f));
     keyboardTooltip.setVisible(false); // Make sure it starts hidden
     keyboardTooltip.setInterceptsMouseClicks(false, false); // Don't intercept mouse clicks
-    addChildComponent(keyboardTooltip); // Use addChildComponent instead of addAndMakeVisible
+    addAndMakeVisible(keyboardTooltip);
     
     // Setup knobs
     startFreqKnob.setSliderStyle(juce::Slider::RotaryVerticalDrag);

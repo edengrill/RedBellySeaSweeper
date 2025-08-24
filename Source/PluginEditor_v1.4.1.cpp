@@ -29,13 +29,10 @@ SwoopDeviceAudioProcessorEditor::SwoopDeviceAudioProcessorEditor (SwoopDeviceAud
     waveformDisplay.setMode(modeNames[audioProcessor.sweepModeParam->getIndex()]);
     addAndMakeVisible(waveformDisplay);
     
-    // Setup power button with mouse listener for tooltip
+    // Setup power button
     powerButton.setButtonText("");
     powerButton.setToggleState(audioProcessor.powerParam->get(), juce::dontSendNotification);
     powerButton.addListener(this);
-    
-    // Add mouse listener to power button for tooltip control
-    powerButton.addMouseListener(this, false);
     addAndMakeVisible(powerButton);
     
     powerLabel.setText("OFF", juce::dontSendNotification);
@@ -44,15 +41,14 @@ SwoopDeviceAudioProcessorEditor::SwoopDeviceAudioProcessorEditor (SwoopDeviceAud
     powerLabel.setFont(juce::Font(12.0f, juce::Font::bold));
     addAndMakeVisible(powerLabel);
     
-    // Setup keyboard tooltip (initially hidden and NOT visible)
+    // Setup keyboard tooltip (initially hidden) - RED TEXT, NO BACKGROUND
     keyboardTooltip.setText("Press X to start/stop", juce::dontSendNotification);
     keyboardTooltip.setJustificationType(juce::Justification::centred);
-    keyboardTooltip.setColour(juce::Label::textColourId, juce::Colours::white); // White text
+    keyboardTooltip.setColour(juce::Label::textColourId, juce::Colour(0xffd83427)); // Red text
     keyboardTooltip.setColour(juce::Label::backgroundColourId, juce::Colours::transparentBlack); // No background
-    keyboardTooltip.setFont(juce::Font(13.0f));
-    keyboardTooltip.setVisible(false); // Make sure it starts hidden
-    keyboardTooltip.setInterceptsMouseClicks(false, false); // Don't intercept mouse clicks
-    addChildComponent(keyboardTooltip); // Use addChildComponent instead of addAndMakeVisible
+    keyboardTooltip.setFont(juce::Font(13.0f)); // Same size as Mode/Wave buttons
+    keyboardTooltip.setVisible(false);
+    addAndMakeVisible(keyboardTooltip);
     
     // Setup knobs
     startFreqKnob.setSliderStyle(juce::Slider::RotaryVerticalDrag);
@@ -137,7 +133,6 @@ SwoopDeviceAudioProcessorEditor::~SwoopDeviceAudioProcessorEditor()
 {
     stopTimer();
     removeKeyListener(this);
-    powerButton.removeMouseListener(this);
     setLookAndFeel(nullptr);
 }
 
@@ -251,29 +246,32 @@ bool SwoopDeviceAudioProcessorEditor::keyPressed(const juce::KeyPress& key, juce
     return false; // Key not handled
 }
 
-void SwoopDeviceAudioProcessorEditor::mouseEnter(const juce::MouseEvent& event)
+void SwoopDeviceAudioProcessorEditor::mouseMove(const juce::MouseEvent& event)
 {
-    // Show tooltip when mouse enters the power button
-    if (event.eventComponent == &powerButton)
+    // Check if mouse is over power button ONLY
+    auto powerButtonBounds = powerButton.getBounds();
+    bool overPowerButton = powerButtonBounds.contains(event.getPosition());
+    
+    if (overPowerButton && !showingTooltip)
     {
-        keyboardTooltip.setVisible(true);
         showingTooltip = true;
+        keyboardTooltip.setVisible(true);
+    }
+    else if (!overPowerButton && showingTooltip)
+    {
+        showingTooltip = false;
+        keyboardTooltip.setVisible(false);
     }
 }
 
 void SwoopDeviceAudioProcessorEditor::mouseExit(const juce::MouseEvent& event)
 {
-    // Hide tooltip when mouse exits the power button
-    if (event.eventComponent == &powerButton)
+    // Hide tooltip when mouse leaves the editor window
+    if (showingTooltip)
     {
-        keyboardTooltip.setVisible(false);
         showingTooltip = false;
+        keyboardTooltip.setVisible(false);
     }
-}
-
-void SwoopDeviceAudioProcessorEditor::mouseMove(const juce::MouseEvent& event)
-{
-    // Not needed anymore - using mouseEnter/mouseExit instead
 }
 
 void SwoopDeviceAudioProcessorEditor::timerCallback()

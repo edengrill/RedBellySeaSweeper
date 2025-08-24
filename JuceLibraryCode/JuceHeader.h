@@ -43,7 +43,7 @@ namespace ProjectInfo
 {
     const char* const  projectName    = "Red Belly Sea Sweeper";
     const char* const  companyName    = "Garden of Ed";
-    const char* const  versionString  = "1.4.0";
-    const int          versionNumber  = 0x10400;
+    const char* const  versionString  = "1.4.4";
+    const int          versionNumber  = 0x10404;
 }
 #endif

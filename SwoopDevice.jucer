@@ -8,7 +8,7 @@
               pluginProducesMidiOut="0" pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0"
               pluginAUExportPrefix="RedBellySeaSweeperAU" pluginRTASCategory="" aaxIdentifier="com.gardenofed.redbellyseasweeper"
               pluginAAXCategory="2" companyWebsite="https://gardenofed.com" bundleIdentifier="com.gardenofed.redbellyseasweeper"
-              version="1.4.0" displaySplashScreen="0" pluginFormats="buildVST3,buildAU,buildStandalone">
+              version="1.4.4" displaySplashScreen="0" pluginFormats="buildVST3,buildAU,buildStandalone">
   <MAINGROUP id="YkH8Zr" name="Red Belly Sea Sweeper">
     <GROUP id="{8B3E5D91-7A3B-9E45-D0C8-3F8A7B9C5E42}" name="Source">
       <FILE id="x7m9Hc" name="PluginProcessor.cpp" compile="1" resource="0"
