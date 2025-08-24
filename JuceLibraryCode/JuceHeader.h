@@ -41,9 +41,9 @@
 #if ! JUCE_DONT_DECLARE_PROJECTINFO
 namespace ProjectInfo
 {
-    const char* const  projectName    = "SwoopDevice";
-    const char* const  companyName    = "Replit";
-    const char* const  versionString  = "1.0.0";
-    const int          versionNumber  = 0x10000;
+    const char* const  projectName    = "Red Belly Sea Sweeper";
+    const char* const  companyName    = "Garden of Ed";
+    const char* const  versionString  = "1.3.1";
+    const int          versionNumber  = 0x10301;
 }
 #endif

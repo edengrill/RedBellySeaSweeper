@@ -41,25 +41,25 @@
  #define JucePlugin_Enable_ARA             0
 #endif
 #ifndef  JucePlugin_Name
- #define JucePlugin_Name                   "SwoopDevice"
+ #define JucePlugin_Name                   "Red Belly Sea Sweeper"
 #endif
 #ifndef  JucePlugin_Desc
- #define JucePlugin_Desc                   "SwoopDevice"
+ #define JucePlugin_Desc                   "Red Belly Sea Sweeper"
 #endif
 #ifndef  JucePlugin_Manufacturer
- #define JucePlugin_Manufacturer           "Replit"
+ #define JucePlugin_Manufacturer           "Garden of Ed"
 #endif
 #ifndef  JucePlugin_ManufacturerWebsite
- #define JucePlugin_ManufacturerWebsite    "https://replit.com"
+ #define JucePlugin_ManufacturerWebsite    "https://gardenofed.com"
 #endif
 #ifndef  JucePlugin_ManufacturerEmail
  #define JucePlugin_ManufacturerEmail      ""
 #endif
 #ifndef  JucePlugin_ManufacturerCode
- #define JucePlugin_ManufacturerCode       0x52706c74
+ #define JucePlugin_ManufacturerCode       0x476f4564
 #endif
 #ifndef  JucePlugin_PluginCode
- #define JucePlugin_PluginCode             0x53776f70
+ #define JucePlugin_PluginCode             0x52625373
 #endif
 #ifndef  JucePlugin_IsSynth
  #define JucePlugin_IsSynth                1
@@ -77,13 +77,13 @@
  #define JucePlugin_EditorRequiresKeyboardFocus  0
 #endif
 #ifndef  JucePlugin_Version
- #define JucePlugin_Version                1.0.0
+ #define JucePlugin_Version                1.3.1
 #endif
 #ifndef  JucePlugin_VersionCode
- #define JucePlugin_VersionCode            0x10000
+ #define JucePlugin_VersionCode            0x10301
 #endif
 #ifndef  JucePlugin_VersionString
- #define JucePlugin_VersionString          "1.0.0"
+ #define JucePlugin_VersionString          "1.3.1"
 #endif
 #ifndef  JucePlugin_VSTUniqueID
  #define JucePlugin_VSTUniqueID            JucePlugin_PluginCode
@@ -101,19 +101,19 @@
  #define JucePlugin_AUSubType              JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_AUExportPrefix
- #define JucePlugin_AUExportPrefix         SwoopDeviceAU
+ #define JucePlugin_AUExportPrefix         RedBellySeaSweeperAU
 #endif
 #ifndef  JucePlugin_AUExportPrefixQuoted
- #define JucePlugin_AUExportPrefixQuoted   "SwoopDeviceAU"
+ #define JucePlugin_AUExportPrefixQuoted   "RedBellySeaSweeperAU"
 #endif
 #ifndef  JucePlugin_AUManufacturerCode
  #define JucePlugin_AUManufacturerCode     JucePlugin_ManufacturerCode
 #endif
 #ifndef  JucePlugin_CFBundleIdentifier
- #define JucePlugin_CFBundleIdentifier     com.replit.SwoopDevice
+ #define JucePlugin_CFBundleIdentifier     com.gardenofed.redbellyseasweeper
 #endif
 #ifndef  JucePlugin_AAXIdentifier
- #define JucePlugin_AAXIdentifier          com.replit.SwoopDevice
+ #define JucePlugin_AAXIdentifier          com.gardenofed.redbellyseasweeper
 #endif
 #ifndef  JucePlugin_AAXManufacturerCode
  #define JucePlugin_AAXManufacturerCode    JucePlugin_ManufacturerCode
@@ -137,7 +137,7 @@
  #define JucePlugin_IAASubType             JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_IAAName
- #define JucePlugin_IAAName                "Replit: SwoopDevice"
+ #define JucePlugin_IAAName                "Garden of Ed: Red Belly Sea Sweeper"
 #endif
 #ifndef  JucePlugin_VSTNumMidiInputs
  #define JucePlugin_VSTNumMidiInputs       16
@@ -152,10 +152,10 @@
  #define JucePlugin_ARATransformationFlags  0
 #endif
 #ifndef  JucePlugin_ARAFactoryID
- #define JucePlugin_ARAFactoryID           "com.Replit.SwoopDevice.factory"
+ #define JucePlugin_ARAFactoryID           "com.GardenofEd.RedBellySeaSweeper.factory"
 #endif
 #ifndef  JucePlugin_ARADocumentArchiveID
- #define JucePlugin_ARADocumentArchiveID   "com.Replit.SwoopDevice.aradocumentarchive.1.0.0"
+ #define JucePlugin_ARADocumentArchiveID   "com.GardenofEd.RedBellySeaSweeper.aradocumentarchive.1.3.1"
 #endif
 #ifndef  JucePlugin_ARACompatibleArchiveIDs
  #define JucePlugin_ARACompatibleArchiveIDs  ""
