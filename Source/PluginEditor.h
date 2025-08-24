@@ -4,7 +4,7 @@
 #include "PluginProcessor.h"
 #include "LookAndFeel.h"
 #include "WaveformDisplay.h"
-#include "DropUpComboBox_v1.0.3.h"
+#include "DropUpComboBox_v1.0.4.h"
 
 class SwoopDeviceAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Slider::Listener,

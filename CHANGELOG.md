@@ -5,6 +5,24 @@ All notable changes to the Swoop Device audio plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2024-08-24
+
+### Fixed
+- Dropdown menus now work multiple times per session (was only opening once)
+- Dropdown menu position now appears directly above combo box (was opening too high)
+- Fixed mouse event handling to prevent popup glitches
+
+### Changed
+- Created `DropUpComboBox_v1.0.4.h` with improved event handling
+- Used `withTargetComponent` for better menu positioning
+- Simplified mouse event handling to prevent conflicts
+- Adjusted menu gap to 4px for closer positioning
+
+### Technical Improvements
+- Override both `mouseDown` and `mouseUp` to control popup behavior
+- Use `sendNotificationSync` for proper state updates
+- More accurate positioning calculation relative to combo box
+
 ## [1.0.3] - 2024-08-24
 
 ### Fixed
