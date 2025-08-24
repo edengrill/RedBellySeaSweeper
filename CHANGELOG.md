@@ -5,6 +5,22 @@ All notable changes to the Swoop Device audio plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2024-08-24
+
+### Added
+- Entire combo box area is now clickable (not just the arrow)
+- Improved user experience with larger clickable area
+
+### Changed
+- Created `DropUpComboBox_v1.0.5.h` with expanded hit area
+- Override `hitTest` to make full rectangle interactive
+- Better mouse event handling for entire combo box area
+
+### Improved
+- Users can now click anywhere on the Wave or Mode box to open dropdown
+- More intuitive interaction - no need to click specifically on arrow
+- Maintains all fixes from v1.0.4 (reopening, positioning)
+
 ## [1.0.4] - 2024-08-24
 
 ### Fixed
