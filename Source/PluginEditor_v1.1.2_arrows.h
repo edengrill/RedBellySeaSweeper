@@ -4,6 +4,7 @@
 #include "PluginProcessor.h"
 #include "LookAndFeel.h"
 #include "WaveformDisplay.h"
+#include "ArrowSelector.h"
 
 class SwoopDeviceAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Slider::Listener,
@@ -46,6 +47,13 @@ private:
     // Branding labels
     juce::Label pluginNameLabel;
     juce::Label authorLabel;
+    
+    // Arrow selectors instead of combo boxes
+    ArrowSelector waveTypeSelector;
+    ArrowSelector sweepModeSelector;
+    
+    juce::Label waveTypeLabel;
+    juce::Label sweepModeLabel;
     
     // Parameter attachments
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> startFreqAttachment;

@@ -5,24 +5,10 @@ SwoopDeviceAudioProcessorEditor::SwoopDeviceAudioProcessorEditor (SwoopDeviceAud
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
     setLookAndFeel(&lookAndFeel);
-    setSize(700, 480); // Reduced height from 644
+    setSize(700, 644);
     
-    // Setup waveform display with Wave/Mode selectors
+    // Setup waveform display
     waveformDisplay.setProcessor(&audioProcessor);
-    waveformDisplay.onWaveTypeChanged = [this](int index) {
-        audioProcessor.waveTypeParam->setValueNotifyingHost(index / 3.0f);
-    };
-    waveformDisplay.onModeChanged = [this](int index) {
-        audioProcessor.sweepModeParam->setValueNotifyingHost(index / 2.0f);
-    };
-    waveformDisplay.setWaveTypeIndex(audioProcessor.waveTypeParam->getIndex());
-    waveformDisplay.setModeIndex(audioProcessor.sweepModeParam->getIndex());
-    
-    // Also set the string names for the display
-    const juce::StringArray waveNames = { "Sine", "Sawtooth", "Square", "Triangle" };
-    const juce::StringArray modeNames = { "Single", "Loop", "Sweep" };
-    waveformDisplay.setWaveType(waveNames[audioProcessor.waveTypeParam->getIndex()]);
-    waveformDisplay.setMode(modeNames[audioProcessor.sweepModeParam->getIndex()]);
     addAndMakeVisible(waveformDisplay);
     
     // Setup power button
@@ -99,18 +85,37 @@ SwoopDeviceAudioProcessorEditor::SwoopDeviceAudioProcessorEditor (SwoopDeviceAud
     sweepTimeValue.setText(juce::String(audioProcessor.sweepTimeParam->get(), 1) + "s", juce::dontSendNotification);
     addAndMakeVisible(sweepTimeValue);
     
-    // Setup branding labels
-    pluginNameLabel.setText("Red Belly Sea Sweeper", juce::dontSendNotification);
-    pluginNameLabel.setJustificationType(juce::Justification::left);
-    pluginNameLabel.setColour(juce::Label::textColourId, juce::Colour(0xffd83427));
-    pluginNameLabel.setFont(juce::Font(20.0f));
-    addAndMakeVisible(pluginNameLabel);
+    // Setup combo boxes
+    waveTypeCombo.addItem("Sine", 1);
+    waveTypeCombo.addItem("Sawtooth", 2);
+    waveTypeCombo.addItem("Square", 3);
+    waveTypeCombo.addItem("Triangle", 4);
+    waveTypeCombo.setSelectedId(audioProcessor.waveTypeParam->getIndex() + 1);
+    waveTypeCombo.setJustificationType(juce::Justification::centredLeft);
+    waveTypeCombo.setColour(juce::ComboBox::textColourId, juce::Colour(0xffd83427));
+    waveTypeCombo.setColour(juce::ComboBox::backgroundColourId, juce::Colours::white);
+    waveTypeCombo.addListener(this);
+    addAndMakeVisible(waveTypeCombo);
     
-    authorLabel.setText("by Garden of Ed", juce::dontSendNotification);
-    authorLabel.setJustificationType(juce::Justification::left);
-    authorLabel.setColour(juce::Label::textColourId, juce::Colour(0xffd83427));
-    authorLabel.setFont(juce::Font(18.0f));
-    addAndMakeVisible(authorLabel);
+    sweepModeCombo.addItem("Single", 1);
+    sweepModeCombo.addItem("Loop", 2);
+    sweepModeCombo.addItem("Sweep", 3);
+    sweepModeCombo.setSelectedId(audioProcessor.sweepModeParam->getIndex() + 1);
+    sweepModeCombo.setJustificationType(juce::Justification::centredLeft);
+    sweepModeCombo.setColour(juce::ComboBox::textColourId, juce::Colour(0xffd83427));
+    sweepModeCombo.setColour(juce::ComboBox::backgroundColourId, juce::Colours::white);
+    sweepModeCombo.addListener(this);
+    addAndMakeVisible(sweepModeCombo);
+    
+    waveTypeLabel.setText("Wave:", juce::dontSendNotification);
+    waveTypeLabel.setColour(juce::Label::textColourId, juce::Colour(0xffd83427));
+    waveTypeLabel.setFont(juce::Font(14.0f));
+    addAndMakeVisible(waveTypeLabel);
+    
+    sweepModeLabel.setText("Mode:", juce::dontSendNotification);
+    sweepModeLabel.setColour(juce::Label::textColourId, juce::Colour(0xffd83427));
+    sweepModeLabel.setFont(juce::Font(14.0f));
+    addAndMakeVisible(sweepModeLabel);
     
     // Start timer for UI updates
     startTimerHz(30);
@@ -132,8 +137,8 @@ void SwoopDeviceAudioProcessorEditor::paint(juce::Graphics& g)
     g.setColour(juce::Colour(0xfff8f8f8));
     g.fillRoundedRectangle(innerBounds.toFloat(), 20.0f);
     
-    // Draw control panel background (same height as waveform)
-    auto controlPanel = juce::Rectangle<int>(40, 220, 620, 160);
+    // Draw control panel background
+    auto controlPanel = juce::Rectangle<int>(40, 220, 620, 200);
     g.setColour(juce::Colour(0xff0c0d13));
     g.fillRoundedRectangle(controlPanel.toFloat(), 15.0f);
 }
@@ -143,16 +148,12 @@ void SwoopDeviceAudioProcessorEditor::resized()
     // Position waveform display
     waveformDisplay.setBounds(40, 40, 620, 160);
     
-    // Position control panel elements (vertically centered in 160px high panel)
-    int controlPanelY = 220;
-    int controlPanelHeight = 160;
-    int knobY = controlPanelY + (controlPanelHeight - 75) / 2 - 10; // Center knobs vertically
-    
     // Position power button
-    powerButton.setBounds(80, knobY + 10, 40, 65);
-    powerLabel.setBounds(70, knobY + 80, 60, 20);
+    powerButton.setBounds(80, 260, 40, 65);
+    powerLabel.setBounds(70, 330, 60, 20);
     
     // Position knobs and labels
+    int knobY = 265;
     int knobSize = 75;
     int knobSpacing = 150;
     int startX = 250;
@@ -169,9 +170,12 @@ void SwoopDeviceAudioProcessorEditor::resized()
     sweepTimeKnob.setBounds(startX + knobSpacing*2 - knobSize/2, knobY, knobSize, knobSize);
     sweepTimeValue.setBounds(startX + knobSpacing*2 - 35, knobY + knobSize + 5, 70, 20);
     
-    // Position branding text at bottom center
-    pluginNameLabel.setBounds(250, 400, 300, 25);
-    authorLabel.setBounds(250, 425, 200, 22);
+    // Position combo boxes closer to bottom
+    waveTypeLabel.setBounds(190, 580, 50, 30);
+    waveTypeCombo.setBounds(240, 580, 150, 30);
+    
+    sweepModeLabel.setBounds(410, 580, 50, 30);
+    sweepModeCombo.setBounds(460, 580, 150, 30);
 }
 
 void SwoopDeviceAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
@@ -208,6 +212,22 @@ void SwoopDeviceAudioProcessorEditor::buttonClicked(juce::Button* button)
         
         // Force repaint to update visual state
         powerButton.repaint();
+    }
+}
+
+void SwoopDeviceAudioProcessorEditor::comboBoxChanged(juce::ComboBox* comboBox)
+{
+    if (comboBox == &waveTypeCombo)
+    {
+        audioProcessor.waveTypeParam->setValueNotifyingHost(
+            (comboBox->getSelectedId() - 1) / 3.0f);
+        waveformDisplay.setWaveType(comboBox->getText());
+    }
+    else if (comboBox == &sweepModeCombo)
+    {
+        audioProcessor.sweepModeParam->setValueNotifyingHost(
+            (comboBox->getSelectedId() - 1) / 2.0f);
+        waveformDisplay.setMode(comboBox->getText());
     }
 }
 

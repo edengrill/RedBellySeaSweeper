@@ -5,6 +5,127 @@ All notable changes to the Swoop Device audio plugin will be documented in this 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2024-08-24
+
+### Revolutionary UI Update - Integrated Controls
+- **Wave and Mode selectors integrated into visualizer window**
+- Positioned on left side, similar to frequency/percentage display
+- Click to cycle through options (no dropdown menus)
+- Hover effect shows clickable areas
+- Clean, minimal design with no popups
+
+### Features
+- WAVE: Click to cycle through SINE → SAWTOOTH → SQUARE → TRIANGLE
+- MODE: Click to cycle through SINGLE → LOOP → SWEEP
+- Visual feedback on hover (highlight effect)
+- Hand cursor on hover to indicate clickable
+
+### Improved
+- No more dropdown positioning issues
+- All controls within the main visualizer
+- Cleaner interface with better use of space
+- Maintains full audio functionality from v1.1.1
+
+### Removed
+- External combo boxes/dropdowns
+- Separate Wave and Mode controls below plugin
+
+## [1.1.3] - 2024-08-24
+
+### Fixed - Dropdown Positioning Solution
+- **Moved dropdowns to top area** between waveform and control panel
+- Wave and Mode dropdowns now at y=205 (just below waveform)
+- Using regular dropdowns (drop DOWN) instead of drop-up menus
+- Dropdowns have clear space to open without overlapping
+
+### Changed
+- Switched from DropUpComboBox to regular ComboBox
+- Dropdowns positioned horizontally centered below waveform
+- Branding text moved slightly lower (y=400, y=425)
+
+### Improved
+- Clean separation between all UI elements
+- No more overlapping menus
+- All options visible when dropdown clicked
+- Maintains full audio functionality
+
+## [1.2.0] - 2024-08-24
+
+### Changed - Major UI Update
+- **Replaced dropdown menus with arrow selectors**
+- Wave and Mode selection now uses up/down arrow buttons
+- No more overlapping popup menus
+- Cleaner, more compact interface
+
+### Features
+- Arrow buttons (▲▼) to cycle through Wave types (Sine/Sawtooth/Square/Triangle)
+- Arrow buttons to cycle through Modes (Single/Loop/Sweep)
+- Current selection always visible in display area
+- No popup menus - everything stays within the plugin bounds
+
+### Improved
+- Better user experience with no overlapping elements
+- More reliable interaction model
+- Suitable for both mouse and touch interfaces
+- Maintains all existing functionality
+
+## [1.1.2] - 2024-08-24
+
+### Fixed  
+- Moved Wave and Mode controls to bottom of white bezel area (y=430)
+- Adjusted drop-up menu positioning to fit within white area
+- Menus now appear between control panel and combo boxes
+
+### Changed
+- Wave/Mode controls repositioned from y=405 to y=430 (closer to bottom edge)
+- Reduced combo box heights from 30px to 25px for better fit
+- Drop-up menus constrained to area between y=380 and y=430
+
+### Added
+- Alternative ArrowSelector implementation for cycling through options
+- Option to use up/down arrow buttons instead of dropdown menus
+
+## [1.1.1] - 2024-08-24
+
+### Fixed
+- Repositioned branding text and dropdowns to align better on left side
+- Adjusted dropdown positions to prevent right-side overflow
+- Fixed drop-up menu positioning to avoid overlapping with control panel
+- Ensured drop-up menus stay below control panel area (y=385 minimum)
+
+### Changed
+- Moved "Red Belly Sea Sweeper" text from x=90 to x=50
+- Adjusted Wave dropdown position from x=435 to x=375
+- Adjusted Mode dropdown position from x=615 to x=555
+- Improved overall UI balance and spacing
+
+## [1.1.0] - 2024-08-24
+
+### Major Update - Rebranding and Redesign
+
+### Changed
+- **New Name**: Plugin renamed to "Red Belly Sea Sweeper by Garden of Ed"
+- **Reduced Height**: Plugin window reduced from 644px to 480px
+- **Control Panel**: Now same height as waveform display (160px)
+- **Layout**: More compact design with less dead space
+
+### Added
+- Plugin branding text "Red Belly Sea Sweeper"
+- Author credit "by Garden of Ed"
+- Both in red color (#d83427) matching the theme
+
+### Repositioned
+- Wave and Mode dropdowns moved to bottom area
+- Dropdowns aligned with branding text on same line
+- Labels positioned inline with dropdowns
+- Controls vertically centered in panel
+
+### Visual Improvements
+- Consistent red accent color throughout
+- Better use of space
+- Professional branding presentation
+- Maintained all v1.0.5 functionality
+
 ## [1.0.5] - 2024-08-24
 
 ### Added

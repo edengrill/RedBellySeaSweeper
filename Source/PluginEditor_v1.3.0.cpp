@@ -17,12 +17,6 @@ SwoopDeviceAudioProcessorEditor::SwoopDeviceAudioProcessorEditor (SwoopDeviceAud
     };
     waveformDisplay.setWaveTypeIndex(audioProcessor.waveTypeParam->getIndex());
     waveformDisplay.setModeIndex(audioProcessor.sweepModeParam->getIndex());
-    
-    // Also set the string names for the display
-    const juce::StringArray waveNames = { "Sine", "Sawtooth", "Square", "Triangle" };
-    const juce::StringArray modeNames = { "Single", "Loop", "Sweep" };
-    waveformDisplay.setWaveType(waveNames[audioProcessor.waveTypeParam->getIndex()]);
-    waveformDisplay.setMode(modeNames[audioProcessor.sweepModeParam->getIndex()]);
     addAndMakeVisible(waveformDisplay);
     
     // Setup power button

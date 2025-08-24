@@ -3,7 +3,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "LookAndFeel.h"
-#include "WaveformDisplay.h"
+#include "WaveformDisplay_v1.3.0.h"
 
 class SwoopDeviceAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Slider::Listener,

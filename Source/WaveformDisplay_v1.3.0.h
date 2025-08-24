@@ -142,9 +142,6 @@ public:
             currentWaveIndex = (currentWaveIndex + 1) % waveTypes.size();
             waveTypeName = waveTypes[currentWaveIndex];
             
-            // Update both the display AND notify the processor
-            setWaveType(waveTypes[currentWaveIndex]);
-            
             if (onWaveTypeChanged)
                 onWaveTypeChanged(currentWaveIndex);
                 
@@ -155,9 +152,6 @@ public:
             // Cycle through modes
             currentModeIndex = (currentModeIndex + 1) % modes.size();
             modeName = modes[currentModeIndex];
-            
-            // Update both the display AND notify the processor
-            setMode(modes[currentModeIndex]);
             
             if (onModeChanged)
                 onModeChanged(currentModeIndex);

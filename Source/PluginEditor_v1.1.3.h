@@ -8,6 +8,7 @@
 class SwoopDeviceAudioProcessorEditor : public juce::AudioProcessorEditor,
                                         public juce::Slider::Listener,
                                         public juce::Button::Listener,
+                                        public juce::ComboBox::Listener,
                                         public juce::Timer
 {
 public:
@@ -19,6 +20,7 @@ public:
     
     void sliderValueChanged(juce::Slider* slider) override;
     void buttonClicked(juce::Button* button) override;
+    void comboBoxChanged(juce::ComboBox* comboBox) override;
     void timerCallback() override;
 
 private:
@@ -47,11 +49,20 @@ private:
     juce::Label pluginNameLabel;
     juce::Label authorLabel;
     
+    // Using regular ComboBox that drops DOWN
+    juce::ComboBox waveTypeCombo;
+    juce::ComboBox sweepModeCombo;
+    
+    juce::Label waveTypeLabel;
+    juce::Label sweepModeLabel;
+    
     // Parameter attachments
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> startFreqAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> endFreqAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sweepTimeAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> powerAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> waveTypeAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> sweepModeAttachment;
     
     void updateFrequencyLabel(juce::Label& label, float freq);
     

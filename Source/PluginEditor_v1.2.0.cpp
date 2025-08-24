@@ -7,22 +7,8 @@ SwoopDeviceAudioProcessorEditor::SwoopDeviceAudioProcessorEditor (SwoopDeviceAud
     setLookAndFeel(&lookAndFeel);
     setSize(700, 480); // Reduced height from 644
     
-    // Setup waveform display with Wave/Mode selectors
+    // Setup waveform display
     waveformDisplay.setProcessor(&audioProcessor);
-    waveformDisplay.onWaveTypeChanged = [this](int index) {
-        audioProcessor.waveTypeParam->setValueNotifyingHost(index / 3.0f);
-    };
-    waveformDisplay.onModeChanged = [this](int index) {
-        audioProcessor.sweepModeParam->setValueNotifyingHost(index / 2.0f);
-    };
-    waveformDisplay.setWaveTypeIndex(audioProcessor.waveTypeParam->getIndex());
-    waveformDisplay.setModeIndex(audioProcessor.sweepModeParam->getIndex());
-    
-    // Also set the string names for the display
-    const juce::StringArray waveNames = { "Sine", "Sawtooth", "Square", "Triangle" };
-    const juce::StringArray modeNames = { "Single", "Loop", "Sweep" };
-    waveformDisplay.setWaveType(waveNames[audioProcessor.waveTypeParam->getIndex()]);
-    waveformDisplay.setMode(modeNames[audioProcessor.sweepModeParam->getIndex()]);
     addAndMakeVisible(waveformDisplay);
     
     // Setup power button
@@ -112,6 +98,40 @@ SwoopDeviceAudioProcessorEditor::SwoopDeviceAudioProcessorEditor (SwoopDeviceAud
     authorLabel.setFont(juce::Font(18.0f));
     addAndMakeVisible(authorLabel);
     
+    // Setup arrow selectors
+    waveTypeSelector.addItem("Sine");
+    waveTypeSelector.addItem("Sawtooth");
+    waveTypeSelector.addItem("Square");
+    waveTypeSelector.addItem("Triangle");
+    waveTypeSelector.setSelectedIndex(audioProcessor.waveTypeParam->getIndex());
+    waveTypeSelector.onChange = [this]() {
+        int index = waveTypeSelector.getSelectedIndex();
+        audioProcessor.waveTypeParam->setValueNotifyingHost(index / 3.0f);
+        waveformDisplay.setWaveType(waveTypeSelector.getSelectedText());
+    };
+    addAndMakeVisible(waveTypeSelector);
+    
+    sweepModeSelector.addItem("Single");
+    sweepModeSelector.addItem("Loop");
+    sweepModeSelector.addItem("Sweep");
+    sweepModeSelector.setSelectedIndex(audioProcessor.sweepModeParam->getIndex());
+    sweepModeSelector.onChange = [this]() {
+        int index = sweepModeSelector.getSelectedIndex();
+        audioProcessor.sweepModeParam->setValueNotifyingHost(index / 2.0f);
+        waveformDisplay.setMode(sweepModeSelector.getSelectedText());
+    };
+    addAndMakeVisible(sweepModeSelector);
+    
+    waveTypeLabel.setText("Wave:", juce::dontSendNotification);
+    waveTypeLabel.setColour(juce::Label::textColourId, juce::Colour(0xffd83427));
+    waveTypeLabel.setFont(juce::Font(16.0f));
+    addAndMakeVisible(waveTypeLabel);
+    
+    sweepModeLabel.setText("Mode:", juce::dontSendNotification);
+    sweepModeLabel.setColour(juce::Label::textColourId, juce::Colour(0xffd83427));
+    sweepModeLabel.setFont(juce::Font(16.0f));
+    addAndMakeVisible(sweepModeLabel);
+    
     // Start timer for UI updates
     startTimerHz(30);
 }
@@ -169,9 +189,16 @@ void SwoopDeviceAudioProcessorEditor::resized()
     sweepTimeKnob.setBounds(startX + knobSpacing*2 - knobSize/2, knobY, knobSize, knobSize);
     sweepTimeValue.setBounds(startX + knobSpacing*2 - 35, knobY + knobSize + 5, 70, 20);
     
-    // Position branding text at bottom center
-    pluginNameLabel.setBounds(250, 400, 300, 25);
-    authorLabel.setBounds(250, 425, 200, 22);
+    // Position branding text
+    pluginNameLabel.setBounds(50, 390, 300, 25);
+    authorLabel.setBounds(50, 412, 200, 22);
+    
+    // Position arrow selectors 
+    waveTypeLabel.setBounds(350, 405, 50, 30);
+    waveTypeSelector.setBounds(405, 405, 110, 30);
+    
+    sweepModeLabel.setBounds(530, 405, 50, 30);
+    sweepModeSelector.setBounds(585, 405, 95, 30);
 }
 
 void SwoopDeviceAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
